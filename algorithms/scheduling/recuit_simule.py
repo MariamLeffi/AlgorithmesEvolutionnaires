@@ -2,12 +2,11 @@
 import math
 import random
 
-def calculer_makespan(sol, durees):
-    """Calcule le makespan"""
+def calculer_duree(sol, durees):
     return sum(durees[t] for t in sol)
 
 def voisin(sol):
-    """Génère un voisin par échange"""
+    """Génère un voisin par échange"""  
     v = sol[:]
     i, j = random.sample(range(len(sol)), 2)
     v[i], v[j] = v[j], v[i]
@@ -18,23 +17,23 @@ def recuit_ordonnancement(durees, T_init, refroid, nb_iter):
     sol = list(range(len(durees)))
     random.shuffle(sol)
     best_sol = sol[:]
-    best_makespan = calculer_makespan(sol, durees)
+    best_duree = calculer_duree(sol, durees)
     T = T_init
     
     for _ in range(nb_iter):
         v = voisin(sol)
-        m_sol = calculer_makespan(sol, durees)
-        m_v = calculer_makespan(v, durees)
+        m_sol = calculer_duree(sol, durees)
+        m_v = calculer_duree(v, durees)
         delta = m_v - m_sol
         
         # Critère d'acceptation
         if delta < 0 or random.random() < math.exp(-delta / T):
             sol = v
-            if m_v < best_makespan:
+            if m_v < best_duree:
                 best_sol = v[:]
-                best_makespan = m_v
+                best_duree = m_v
         
         # Refroidissement
         T *= refroid
     
-    return best_sol, best_makespan
+    return best_sol, best_duree

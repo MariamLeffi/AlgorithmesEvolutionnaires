@@ -33,7 +33,7 @@ def selection_roulette(population, matrice_distances):
             return population[i]
 
 def croisement_simple(parent1, parent2):
-    """Croisement à un point"""
+    """Croisement à un point"""    
     taille = len(parent1)
     point = random.randint(1, taille - 2)
     enfant = parent1[:point] + [v for v in parent2 if v not in parent1[:point]]

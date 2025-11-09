@@ -29,7 +29,7 @@ def selection_rang(pop, matrice):
     r = random.random()
     cumul = 0
     for i, p in enumerate(probabilites):
-        cumul += p
+        cumul += p+1
         if r <= cumul:
             return sorted_pop[i]
 

@@ -11,7 +11,7 @@ def distance_totale(sol, dist):
     return d
 
 def voisin(sol):
-    """Génère un voisin en échangeant deux villes"""
+    """Génère un vois in en échangeant deux villes"""
     v = sol[:]
     i, j = random.sample(range(len(sol)), 2)
     v[i], v[j] = v[j], v[i]
@@ -42,3 +42,4 @@ def recuit(dist, T_init, refroid, nb_iter):
         T *= refroid
     
     return best_sol, best_dist
+
